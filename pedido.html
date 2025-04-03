@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Especial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            font-family: 'Pacifico', cursive;
+            text-align: center;
+            overflow: hidden;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .buttons {
+            position: relative;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Pacifico', cursive;
+        }
+        .yes {
+            background-color: #ff66b2;
+            color: white;
+            animation: wiggle 1s infinite;
+        }
+        .no {
+            background-color: #666;
+            color: white;
+            position: absolute;
+        }
+        .message {
+            display: none;
+            font-size: 32px;
+            color: #ff0066;
+            font-weight: bold;
+            margin-top: 30px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .heart {
+            position: absolute;
+            color: #ff3366;
+            font-size: 24px;
+            animation: float 4s linear infinite;
+        }
+        @keyframes float {
+            0% {transform: translateY(0) scale(1); opacity: 1;}
+            100% {transform: translateY(-300px) scale(1.5); opacity: 0;}
+        }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Você aceita se casar comigo?</h1>
+    <div class="buttons" id="buttonsContainer">
+        <button class="yes" onclick="showLove()">Sim</button>
+        <button class="no" onmouseover="moveButton()">Não</button>
+    </div>
+    <div class="message" id="loveMessage">Eu te amooooooooo!</div>
+
+    <script>
+        function moveButton() {
+            let button = document.querySelector('.no');
+            let y = Math.random() * (window.innerHeight - 50);
+            button.style.top = `${y}px`;
+        }
+
+        function showLove() {
+            document.getElementById("loveMessage").style.display = "block";
+            document.getElementById("buttonsContainer").style.display = "none";
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.top = Math.random() * window.innerHeight + "px";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }
+        }
+    </script>
+</body>
+</html>
